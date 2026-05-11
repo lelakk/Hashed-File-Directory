@@ -13,7 +13,11 @@ katalog::katalog(int poczatkowaPojemnosc) {
 
 int katalog::haszuj(std::string nazwaPliku) {
     // funkcja co zmieni string na indeks {0, pojemnosc}
-    return 0;
+    int hash = 0;
+    for (char c : nazwaPliku) {
+        hash = hash + c;
+    }
+    return hash % this->pojemnosc;
 }
 
 bool katalog::wstaw(std::string nazwaPliku, int inode) {

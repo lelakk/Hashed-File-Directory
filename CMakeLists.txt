@@ -1,3 +1,4 @@
+add_executable(new_target main.cpp)
 cmake_minimum_required(VERSION 3.10)
 
 project(KatalogProjekt)

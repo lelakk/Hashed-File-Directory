@@ -4,6 +4,5 @@
 #include "katalog.hpp"
 
 int main() {
-    katalog mojKatalog(10);
-    mojKatalog.wyswietl();
+    return 0;
 }
