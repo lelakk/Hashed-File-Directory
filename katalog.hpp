@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 
 struct wpisKatalogowy {
     std::string nazwaPliku;
@@ -17,11 +18,17 @@ private:
     int pojemnosc;
 
     int haszuj(std::string nazwaPliku);
+    //do doubleHash
+    int haszuj2(std::string nazwaPliku);
 
 public:
     katalog(int poczatkowaPojemnosc=100);
 
-    bool wstaw(std::string nazwaPliku, int inode);
+    void insertChain(std::string nazwaPliku, int inode);
+    void insertLinear(std::string nazwaPliku, int inode);
+    void insertQuadratic(std::string nazwaPliku, int inode);
+    void insertDoubleHash(std::string nazwaPliku, int inode);
+
     bool usun(std::string nazwaPliku);
     int szukaj(std::string nazwaPliku);
     void wyswietl();
