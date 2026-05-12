@@ -10,4 +10,6 @@ add_executable(KatalogProjekt main.cpp katalog.cpp
         KatalogChain.cpp
         KatalogChain.hpp
         KatalogLinear.cpp
-        KatalogLinear.h)
+        KatalogLinear.h
+        KatalogQuadratic.cpp
+        KatalogQuadratic.h)
