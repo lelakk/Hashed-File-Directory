@@ -30,8 +30,7 @@ int katalog::haszuj2(std::string nazwaPliku) {
 }
 
 void katalog::insertChain(std::string nazwaPliku, int inode) {
-    int idx = haszuj(nazwaPliku);
-    tablica[idx]
+   
 }
 
 void katalog::insertLinear(std::string nazwaPliku, int inode) {
