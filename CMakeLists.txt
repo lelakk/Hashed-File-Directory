@@ -8,4 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(KatalogProjekt main.cpp katalog.cpp
         KatalogChain.cpp
-        KatalogChain.hpp)
+        KatalogChain.hpp
+        KatalogLinear.cpp
+        KatalogLinear.h)

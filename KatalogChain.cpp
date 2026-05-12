@@ -14,6 +14,7 @@ int KatalogChain::haszuj(std::string nazwaPliku) {
 
 KatalogChain::KatalogChain(int poczatkowaPojemnosc) {
     this->pojemnosc = poczatkowaPojemnosc;
+    tablica.resize(pojemnosc);
 }
 
 void KatalogChain::insert(std::string nazwaPliku, int inode) {
