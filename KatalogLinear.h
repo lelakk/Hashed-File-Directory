@@ -1,10 +1,9 @@
-//
-// Created by Jan Józwik on 12/05/2026.
-//
-
 #ifndef KATALOGPROJEKT_KATALOGLINEAR_H
 #define KATALOGPROJEKT_KATALOGLINEAR_H
-#include "KatalogDouble.hpp"
+
+#include <vector>
+#include <string>
+#include "katalog.hpp"
 
 class KatalogLinear {
     std::vector<wpisKatalogowy> tablica;
@@ -16,12 +15,12 @@ class KatalogLinear {
 public:
     KatalogLinear(int poczatkowaPojemnosc=100);
 
-    void insert(std::string& nazwaPliku, int inode);
+    // Dodano typPliku
+    void insert(std::string& nazwaPliku, int inode, std::string typPliku);
     bool usun(std::string& nazwaPliku);
     int szukaj(std::string& nazwaPliku);
     void wyswietl();
     void powieksz();
 };
-
 
 #endif //KATALOGPROJEKT_KATALOGLINEAR_H
