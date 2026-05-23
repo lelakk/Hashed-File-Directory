@@ -14,4 +14,5 @@ add_executable(KatalogProjekt main.cpp
         KatalogQuadratic.cpp
         KatalogQuadratic.h
         KatalogDoubleHash.cpp
-        KatalogDoubleHash.h)
+        KatalogDoubleHash.h
+        Katalog.hpp)

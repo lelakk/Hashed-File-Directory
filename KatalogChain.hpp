@@ -17,7 +17,7 @@ class KatalogChain {
 public:
     KatalogChain(int poczatkowaPojemnosc=100);
 
-    void insert(std::string nazwaPliku, int inode);
+    void insert(std::string nazwaPliku, int inode, std::string typPliku);
     bool usun(std::string nazwaPliku);
     int szukaj(std::string nazwaPliku);
     void wyswietl();
