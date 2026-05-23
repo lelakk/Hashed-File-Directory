@@ -1,7 +1,7 @@
-#include "KatalogQuadratic.h"
+#include "KatalogDoubleHash.h"
 #include <iostream>
 
-int KatalogQuadratic::haszuj(std::string &nazwaPliku, int size) {
+int KatalogDoubleHash::haszuj(std::string& nazwaPliku, int size) {
     int hash = 0;
     for (char c : nazwaPliku) {
         hash = hash + c;
@@ -9,7 +9,15 @@ int KatalogQuadratic::haszuj(std::string &nazwaPliku, int size) {
     return hash % size;
 }
 
-KatalogQuadratic::KatalogQuadratic(int poczatkowaPojemnosc) {
+int KatalogDoubleHash::haszuj2(std::string& nazwaPliku, int size) {
+    int hash = 0;
+    for (char c : nazwaPliku) {
+        hash = hash * 19 + c;
+    }
+    return (hash % (size - 1)) + 1;
+}
+
+KatalogDoubleHash::KatalogDoubleHash(int poczatkowaPojemnosc) {
     pojemnosc = poczatkowaPojemnosc;
     tablica.resize(pojemnosc);
     liczbaElementow = 0;
@@ -20,17 +28,17 @@ KatalogQuadratic::KatalogQuadratic(int poczatkowaPojemnosc) {
     }
 }
 
-void KatalogQuadratic::insert(std::string &nazwaPliku, int inode, std::string typPliku) {
+void KatalogDoubleHash::insert(std::string& nazwaPliku, int inode, std::string typPliku) {
     if (static_cast<double>(liczbaElementow + 1) / pojemnosc > 0.7) {
         powieksz();
     }
-    
     int bazowy = haszuj(nazwaPliku, pojemnosc);
+    int step = haszuj2(nazwaPliku, pojemnosc);
     int pierwszeUsuniete = -1;
 
     for (int i = 0; i < pojemnosc; i++) {
-        int index = (bazowy + i * i) % pojemnosc;
-
+        int index = (bazowy + i * step) % pojemnosc;
+        
         if (tablica[index].zajety && tablica[index].nazwaPliku == nazwaPliku) {
             std::cout << "Plik o takiej nazwie juz istnieje" << std::endl;
             return;
@@ -44,18 +52,18 @@ void KatalogQuadratic::insert(std::string &nazwaPliku, int inode, std::string ty
             if (pierwszeUsuniete != -1) {
                 index = pierwszeUsuniete;
             }
-            
             tablica[index].nazwaPliku = nazwaPliku;
             tablica[index].inode = inode;
             tablica[index].typPliku = typPliku;
             tablica[index].zajety = true;
             tablica[index].usuniety = false;
             liczbaElementow++;
-            std::cout << "Quadratic: Dodano '" << nazwaPliku << "' pod indeks " << index << "\n";
+            std::cout << "Double Hash: Dodano '" << nazwaPliku << "' pod indeks " << index << "\n";
             return;
         }
     }
 
+    // Jeśli tablica pełna, ale ma usunięte miejsca
     if (pierwszeUsuniete != -1) {
         tablica[pierwszeUsuniete].nazwaPliku = nazwaPliku;
         tablica[pierwszeUsuniete].inode = inode;
@@ -63,19 +71,20 @@ void KatalogQuadratic::insert(std::string &nazwaPliku, int inode, std::string ty
         tablica[pierwszeUsuniete].zajety = true;
         tablica[pierwszeUsuniete].usuniety = false;
         liczbaElementow++;
-        std::cout << "Quadratic: Dodano '" << nazwaPliku << "' pod indeks " << pierwszeUsuniete << "\n";
+        std::cout << "Double Hash: Dodano '" << nazwaPliku << "' pod indeks " << pierwszeUsuniete << "\n";
         return;
     }
 
     std::cout << "Nie udalo sie znalezc miejsca (tablica moze nie byc pelna)" << std::endl;
 }
 
-bool KatalogQuadratic::usun(std::string &nazwaPliku) {
+bool KatalogDoubleHash::usun(std::string& nazwaPliku) {
     int bazowy = haszuj(nazwaPliku, this->pojemnosc);
-    
-    for (int i = 0; i < pojemnosc; i++) {
-        int index = (bazowy + i * i) % pojemnosc;
+    int step = haszuj2(nazwaPliku, pojemnosc);
 
+    for (int i = 0; i < pojemnosc; i++) {
+        int index = (bazowy + i * step) % pojemnosc;
+        
         if (!tablica[index].zajety && !tablica[index].usuniety) {
             break;
         }
@@ -91,11 +100,12 @@ bool KatalogQuadratic::usun(std::string &nazwaPliku) {
     return false;
 }
 
-int KatalogQuadratic::szukaj(std::string &nazwaPliku) {
+int KatalogDoubleHash::szukaj(std::string& nazwaPliku) {
     int bazowy = haszuj(nazwaPliku, this->pojemnosc);
-    
+    int step = haszuj2(nazwaPliku, pojemnosc);
+
     for (int i = 0; i < pojemnosc; i++) {
-        int index = (bazowy + i * i) % pojemnosc;
+        int index = (bazowy + i * step) % pojemnosc;
         
         if (!tablica[index].zajety && !tablica[index].usuniety) {
             break;
@@ -108,8 +118,8 @@ int KatalogQuadratic::szukaj(std::string &nazwaPliku) {
     return -1;
 }
 
-void KatalogQuadratic::wyswietl() {
-    std::cout << "Katalog Quadratic (pojemnosc: " << pojemnosc << "):\n";
+void KatalogDoubleHash::wyswietl() {
+    std::cout << "Katalog Double Hash (pojemnosc: " << pojemnosc << "):\n";
     for (int i = 0; i < pojemnosc; i++) {
         std::cout << "[" << i << "] ";
         if (!tablica[i].zajety && !tablica[i].usuniety) {
@@ -123,7 +133,7 @@ void KatalogQuadratic::wyswietl() {
     }
 }
 
-void KatalogQuadratic::powieksz() {
+void KatalogDoubleHash::powieksz() {
     int nowaPojemnosc = pojemnosc * 2;
     std::vector<wpisKatalogowy> nowaTablica(nowaPojemnosc);
 
@@ -136,12 +146,13 @@ void KatalogQuadratic::powieksz() {
     for (int i = 0; i < pojemnosc; i++) {
         if (tablica[i].zajety) {
             int bazowy = haszuj(tablica[i].nazwaPliku, nowaPojemnosc);
+            int step = haszuj2(tablica[i].nazwaPliku, nowaPojemnosc);
             int nowyIndex = bazowy;
-            int j = 1;
             
+            int j = 0;
             while (nowaTablica[nowyIndex].zajety) {
-                nowyIndex = (bazowy + j * j) % nowaPojemnosc;
                 j++;
+                nowyIndex = (bazowy + j * step) % nowaPojemnosc; 
             }
 
             nowaTablica[nowyIndex] = tablica[i];
@@ -151,5 +162,5 @@ void KatalogQuadratic::powieksz() {
     tablica = nowaTablica;
     pojemnosc = nowaPojemnosc;
 
-    std::cout << "Powiekszono tablice (Quadratic) do rozmiaru " << pojemnosc << "\n";
+    std::cout << "Powiekszono tablice (Double Hash) do rozmiaru " << pojemnosc << "\n";
 }

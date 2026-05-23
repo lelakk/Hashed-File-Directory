@@ -1,19 +1,20 @@
-#ifndef KATALOGPROJEKT_KATALOGQUADRATIC_H
-#define KATALOGPROJEKT_KATALOGQUADRATIC_H
+#ifndef KATALOGPROJEKT_KATALOGDOUBLEHASH_H
+#define KATALOGPROJEKT_KATALOGDOUBLEHASH_H
 
 #include <vector>
 #include <string>
 #include "katalog.hpp"
 
-class KatalogQuadratic {
+class KatalogDoubleHash {
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;
     int liczbaElementow;
 
     int haszuj(std::string& nazwaPliku, int size);
+    int haszuj2(std::string& nazwaPliku, int size); // druga funkcja haszująca
 
 public:
-    KatalogQuadratic(int poczatkowaPojemnosc=100);
+    KatalogDoubleHash(int poczatkowaPojemnosc=100);
     void insert(std::string& nazwaPliku, int inode, std::string typPliku);
     bool usun(std::string& nazwaPliku);
     int szukaj(std::string& nazwaPliku);
@@ -21,4 +22,4 @@ public:
     void powieksz();
 };
 
-#endif //KATALOGPROJEKT_KATALOGQUADRATIC_H
+#endif //KATALOGPROJEKT_KATALOGDOUBLEHASH_H

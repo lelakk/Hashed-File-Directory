@@ -1,25 +1,75 @@
 #include <iostream>
+#include "KatalogChain.hpp"
 #include "KatalogLinear.h"
 #include "KatalogQuadratic.h"
+#include "KatalogDoubleHash.h"
 
 int main() {
+    // Przygotowanie zmiennych z nazwami i odpowiadającymi im typami
+    std::string f1 = "dokument.txt", t1 = ".txt";
+    std::string f2 = "foto.grafia.jpg",     t2 = ".jpg";
+    std::string f3 = "muzyka.mp3",   t3 = ".mp3";
+    std::string f4 = "video.mp4",    t4 = ".mp4";
+    std::string f5 = "archiwum.zip", t5 = ".zip";
+
+    // ========== METODA LANCUCHOWA (CHAIN) ==========
+    std::cout << "\n========== CHAIN (LANCUCHOWA) ==========\n";
+    KatalogChain katalogC(5);
+
+    std::cout << "\n=== Wstawianie plikow ===\n";
+    katalogC.insert(f1, 101, t1);
+    katalogC.insert(f2, 102, t2);
+    katalogC.insert(f3, 103, t3);
+    katalogC.insert(f4, 104, t4);
+    katalogC.insert(f5, 105, t5);
+
+    std::cout << "\n=== Stan katalogu ===\n";
+    katalogC.wyswietl();
+
+    std::cout << "\n=== Duplikat ===\n";
+    katalogC.insert(f1, 999, t1);
+
+    std::cout << "\n=== Szukanie ===\n";
+    std::string szukanyC = "foto.jpg";
+    int inodeC = katalogC.szukaj(szukanyC);
+    if (inodeC != -1) {
+        std::cout << "Znaleziono '" << szukanyC << "' -> inode: " << inodeC << "\n";
+    }
+
+    std::string nieznanyC = "brak.txt";
+    inodeC = katalogC.szukaj(nieznanyC);
+    if (inodeC == -1) {
+        std::cout << "Nie znaleziono '" << nieznanyC << "'\n";
+    }
+
+    std::cout << "\n=== Usuwanie ===\n";
+    katalogC.usun(f2);
+
+    std::cout << "\n=== Stan po usunieciu ===\n";
+    katalogC.wyswietl();
+
+    std::cout << "\n=== Szukanie usunietego pliku ===\n";
+    inodeC = katalogC.szukaj(f2);
+    if (inodeC == -1) {
+        std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
+    }
+
+    // ========== METODA LINIOWA (LINEAR) ==========
+    std::cout << "\n\n========== LINEAR (LINIOWA) ==========\n";
     KatalogLinear katalogL(5);
 
-    std::cout << "=== Wstawianie plikow ===\n";
-    std::string f1 = "dokument.txt", f2 = "foto.jpg", f3 = "muzyka.mp3",
-            f4 = "video.mp4", f5 = "archiwum.zip";
-
-    katalogL.insert(f1, 101);
-    katalogL.insert(f2, 102);
-    katalogL.insert(f3, 103);
-    katalogL.insert(f4, 104);
-    katalogL.insert(f5, 105);
+    std::cout << "\n=== Wstawianie plikow ===\n";
+    katalogL.insert(f1, 101, t1);
+    katalogL.insert(f2, 102, t2);
+    katalogL.insert(f3, 103, t3);
+    katalogL.insert(f4, 104, t4);
+    katalogL.insert(f5, 105, t5);
 
     std::cout << "\n=== Stan katalogu ===\n";
     katalogL.wyswietl();
 
     std::cout << "\n=== Duplikat ===\n";
-    katalogL.insert(f1, 999);
+    katalogL.insert(f1, 999, t1);
 
     std::cout << "\n=== Szukanie ===\n";
     std::string szukanyL = "foto.jpg";
@@ -46,33 +96,33 @@ int main() {
         std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
     }
 
-    std::cout << std::endl << "=== Quadratic ===" <<  std::endl;
-
+    // ========== METODA KWADRATOWA (QUADRATIC) ==========
+    std::cout << "\n\n========== QUADRATIC (KWADRATOWA) ==========\n";
     KatalogQuadratic katalogQ(5);
-    std::cout << "=== Wstawianie plikow ===\n";
 
-    katalogQ.insert(f1, 101);
-    katalogQ.insert(f2, 102);
-    katalogQ.insert(f3, 103);
-    katalogQ.insert(f4, 104);
-    katalogQ.insert(f5, 105);
+    std::cout << "\n=== Wstawianie plikow ===\n";
+    katalogQ.insert(f1, 101, t1);
+    katalogQ.insert(f2, 102, t2);
+    katalogQ.insert(f3, 103, t3);
+    katalogQ.insert(f4, 104, t4);
+    katalogQ.insert(f5, 105, t5);
 
     std::cout << "\n=== Stan katalogu ===\n";
     katalogQ.wyswietl();
 
     std::cout << "\n=== Duplikat ===\n";
-    katalogQ.insert(f1, 999);
+    katalogQ.insert(f1, 999, t1);
 
     std::cout << "\n=== Szukanie ===\n";
-    std::string szukany = "foto.jpg";
-    int inodeQ = katalogL.szukaj(szukany);
+    std::string szukanyQ = "foto.jpg";
+    int inodeQ = katalogQ.szukaj(szukanyQ);
     if (inodeQ != -1) {
-        std::cout << "Znaleziono '" << szukany << "' -> inode: " << inodeQ << "\n";
+        std::cout << "Znaleziono '" << szukanyQ << "' -> inode: " << inodeQ << "\n";
     }
 
     std::string nieznanyQ = "brak.txt";
-    inodeL = katalogQ.szukaj(nieznanyQ);
-    if (inodeL == -1) {
+    inodeQ = katalogQ.szukaj(nieznanyQ);
+    if (inodeQ == -1) {
         std::cout << "Nie znaleziono '" << nieznanyQ << "'\n";
     }
 
@@ -82,9 +132,54 @@ int main() {
     std::cout << "\n=== Stan po usunieciu ===\n";
     katalogQ.wyswietl();
 
-    std::cout << "\n=== Szukanie usuniętego pliku ===\n";
-    inodeL = katalogQ.szukaj(f2);
+    std::cout << "\n=== Szukanie usunietego pliku ===\n";
+    inodeQ = katalogQ.szukaj(f2);
     if (inodeQ == -1) {
         std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
     }
+
+    // ========== METODA PODWOJNEGO HASZOWANIA (DOUBLE HASH) ==========
+    std::cout << "\n\n========== DOUBLE HASH (PODWOJNE HASZOWANIE) ==========\n";
+    KatalogDoubleHash katalogD(5);
+
+    std::cout << "\n=== Wstawianie plikow ===\n";
+    katalogD.insert(f1, 101, t1);
+    katalogD.insert(f2, 102, t2);
+    katalogD.insert(f3, 103, t3);
+    katalogD.insert(f4, 104, t4);
+    katalogD.insert(f5, 105, t5);
+
+    std::cout << "\n=== Stan katalogu ===\n";
+    katalogD.wyswietl();
+
+    std::cout << "\n=== Duplikat ===\n";
+    katalogD.insert(f1, 999, t1);
+
+    std::cout << "\n=== Szukanie ===\n";
+    std::string szukanyD = "foto.jpg";
+    int inodeD = katalogD.szukaj(szukanyD);
+    if (inodeD != -1) {
+        std::cout << "Znaleziono '" << szukanyD << "' -> inode: " << inodeD << "\n";
+    }
+
+    std::string nieznanyD = "brak.txt";
+    inodeD = katalogD.szukaj(nieznanyD);
+    if (inodeD == -1) {
+        std::cout << "Nie znaleziono '" << nieznanyD << "'\n";
+    }
+
+    std::cout << "\n=== Usuwanie ===\n";
+    katalogD.usun(f2);
+
+    std::cout << "\n=== Stan po usunieciu ===\n";
+    katalogD.wyswietl();
+
+    std::cout << "\n=== Szukanie usunietego pliku ===\n";
+    inodeD = katalogD.szukaj(f2);
+    if (inodeD == -1) {
+        std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
+    }
+
+    std::cout << "\n\n========== KONIEC PROGRAMU ==========\n";
+    return 0;
 }
