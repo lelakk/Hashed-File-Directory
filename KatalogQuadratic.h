@@ -11,8 +11,9 @@ class KatalogQuadratic {
 
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;
+    int liczbaElementow;
 
-    int haszuj(std::string& nazwaPliku);
+    int haszuj(std::string& nazwaPliku, int size);
 
 public:
     KatalogQuadratic(int poczatkowaPojemnosc=100);
@@ -21,6 +22,7 @@ public:
     bool usun(std::string& nazwaPliku);
     int szukaj(std::string& nazwaPliku);
     void wyswietl();
+    void powieksz();
 };
 
 
