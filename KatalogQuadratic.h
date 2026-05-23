@@ -4,14 +4,14 @@
 
 #ifndef KATALOGPROJEKT_KATALOGQUADRATIC_H
 #define KATALOGPROJEKT_KATALOGQUADRATIC_H
-#include "katalog.hpp"
+#include "KatalogDouble.hpp"
 
 
 class KatalogQuadratic {
 
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;
-    int liczbaElementow;
+    int liczbaElementow = 0;
 
     int haszuj(std::string& nazwaPliku, int size);
 

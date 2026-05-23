@@ -6,7 +6,7 @@
 #define KATALOGPROJEKT_KATALOGCHAIN_H
 
 #include <vector>
-#include "katalog.hpp"
+#include "KatalogDouble.hpp"
 
 
 class KatalogChain {

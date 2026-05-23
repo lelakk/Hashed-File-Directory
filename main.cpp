@@ -72,7 +72,7 @@ int main() {
 
     std::string nieznanyQ = "brak.txt";
     inodeL = katalogQ.szukaj(nieznanyQ);
-    if (inodeL == -1) {
+    if (inodeQ == -1) {
         std::cout << "Nie znaleziono '" << nieznanyQ << "'\n";
     }
 
@@ -83,7 +83,7 @@ int main() {
     katalogQ.wyswietl();
 
     std::cout << "\n=== Szukanie usuniętego pliku ===\n";
-    inodeL = katalogQ.szukaj(f2);
+    inodeQ = katalogQ.szukaj(f2);
     if (inodeQ == -1) {
         std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
     }

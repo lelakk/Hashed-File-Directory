@@ -6,7 +6,7 @@ project(KatalogProjekt)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(KatalogProjekt main.cpp katalog.cpp
+add_executable(KatalogProjekt main.cpp KatalogDouble.cpp
         KatalogChain.cpp
         KatalogChain.hpp
         KatalogLinear.cpp

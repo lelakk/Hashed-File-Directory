@@ -12,7 +12,7 @@ struct wpisKatalogowy {
     bool zajety=false;
 };
 
-class katalog {
+class KatalogDouble {
 private:
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;
@@ -22,13 +22,9 @@ private:
     int haszuj2(std::string nazwaPliku);
 
 public:
-    katalog(int poczatkowaPojemnosc=100);
+    KatalogDouble(int poczatkowaPojemnosc=100);
 
-    void insertChain(std::string nazwaPliku, int inode);
-    void insertLinear(std::string nazwaPliku, int inode);
-    void insertQuadratic(std::string nazwaPliku, int inode);
     void insertDoubleHash(std::string nazwaPliku, int inode);
-
     bool usun(std::string nazwaPliku);
     int szukaj(std::string nazwaPliku);
     void wyswietl();

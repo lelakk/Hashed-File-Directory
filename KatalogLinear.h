@@ -4,7 +4,7 @@
 
 #ifndef KATALOGPROJEKT_KATALOGLINEAR_H
 #define KATALOGPROJEKT_KATALOGLINEAR_H
-#include "katalog.hpp"
+#include "KatalogDouble.hpp"
 
 class KatalogLinear {
     std::vector<wpisKatalogowy> tablica;
