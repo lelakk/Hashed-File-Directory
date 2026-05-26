@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "katalog.hpp"
-
+//Jan Józwik
 class KatalogQuadratic {
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;

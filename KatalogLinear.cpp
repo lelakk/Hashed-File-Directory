@@ -1,6 +1,6 @@
 #include "KatalogLinear.h"
 #include <iostream>
-
+//Jan Józwik
 int KatalogLinear::haszuj(std::string& nazwaPliku, int size) {
     int hash = 0;
     for (char c : nazwaPliku) {
@@ -23,6 +23,7 @@ void KatalogLinear::insert(std::string& nazwaPliku, int inode, std::string typPl
     if (static_cast<double>(liczbaElementow) / pojemnosc > 0.7) {
         powieksz();
     }
+
     int index = haszuj(nazwaPliku, this->pojemnosc);
     int startowaPozycja = index;
     int pierwszeUsuniete = -1;

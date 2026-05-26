@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "katalog.hpp"
-
+//Jan Józwik
 class KatalogLinear {
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;

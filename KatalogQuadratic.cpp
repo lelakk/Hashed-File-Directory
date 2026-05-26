@@ -1,6 +1,6 @@
 #include "KatalogQuadratic.h"
 #include <iostream>
-
+//Jan Józwik
 int KatalogQuadratic::haszuj(std::string &nazwaPliku, int size) {
     int hash = 0;
     for (char c : nazwaPliku) {
@@ -21,7 +21,7 @@ KatalogQuadratic::KatalogQuadratic(int poczatkowaPojemnosc) {
 }
 
 void KatalogQuadratic::insert(std::string &nazwaPliku, int inode, std::string typPliku) {
-    if (static_cast<double>(liczbaElementow + 1) / pojemnosc > 0.7) {
+    if (static_cast<double>(liczbaElementow + 1) / pojemnosc > 0.5) {
         powieksz();
     }
     
