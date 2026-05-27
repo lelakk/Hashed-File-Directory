@@ -4,6 +4,68 @@
 #include "KatalogQuadratic.h"
 #include "KatalogDoubleHash.h"
 
+template <typename TypKatalogu>
+void obslugujMenu() {
+    int rozmiar;
+    std::cout << "\nPodaj rozmiar nowego katalogu: ";
+    std::cin >> rozmiar;
+
+    TypKatalogu katalog(rozmiar);
+    int wybor;
+
+    do {
+        std::cout << "\n=== INTERAKTYWNE MENU ===\n"
+                  << "1. Dodaj plik\n"
+                  << "2. Szukaj pliku\n"
+                  << "3. Usun plik\n"
+                  << "4. Wyswietl katalog\n"
+                  << "0. Wroc do glownego menu / Zakoncz\n"
+                  << "Wybierz operacje: ";
+        std::cin >> wybor;
+
+        std::string nazwa, typ;
+        int inode;
+
+        switch(wybor) {
+            case 1:
+                std::cout << "Podaj nazwe pliku: ";
+                std::cin >> nazwa;
+                std::cout << "Podaj inode (liczba calkowita): ";
+                std::cin >> inode;
+                std::cout << "Podaj typ pliku: ";
+                std::cin >> typ;
+                katalog.insert(nazwa, inode, typ);
+                std::cout << "Wykonano probe dodania pliku.\n";
+                break;
+            case 2:
+                std::cout << "Podaj nazwe pliku do wyszukania: ";
+                std::cin >> nazwa;
+                inode = katalog.szukaj(nazwa);
+                if (inode != -1) {
+                    std::cout << "Znaleziono plik " << nazwa << "Inode: " << inode << "\n";
+                } else {
+                    std::cout << "Nie znaleziono pliku " << nazwa << ".\n";
+                }
+                break;
+            case 3:
+                std::cout << "Podaj nazwe pliku do usuniecia: ";
+                std::cin >> nazwa;
+                katalog.usun(nazwa);
+                std::cout << "Wykonano polecenie usuniecia pliku.\n";
+                break;
+            case 4:
+                std::cout << "\n--- STAN KATALOGU ---\n";
+                katalog.wyswietl();
+                break;
+            case 0:
+                std::cout << "Wychodzenie z menu...\n";
+                break;
+            default:
+                std::cout << "Nieprawidlowy wybor. Sprobuj ponownie.\n";
+        }
+    } while (wybor != 0);
+}
+
 int main() {
     // Przygotowanie zmiennych z nazwami i odpowiadającymi im typami
     std::string f1 = "dokument.txt", t1 = ".txt";
@@ -180,6 +242,45 @@ int main() {
         std::cout << "Nie znaleziono '" << f2 << "' (usunieto)\n";
     }
 
-    std::cout << "\n\n========== KONIEC PROGRAMU ==========\n";
+    int wybranaMetoda;
+    do {
+        std::cout << "\n\n=================================================\n";
+        std::cout << "            TRYB INTERAKTYWNY\n";
+        std::cout << "=================================================\n";
+        std::cout << "Wybierz metode haszowania do wlasnych testow:\n"
+                  << "1. Metoda Lancuchowa (Chain)\n"
+                  << "2. Metoda Liniowa (Linear)\n"
+                  << "3. Metoda Kwadratowa (Quadratic)\n"
+                  << "4. Podwojne Haszowanie (Double Hash)\n"
+                  << "0. Zakoncz program\n"
+                  << "Wybieram: ";
+        std::cin >> wybranaMetoda;
+
+        switch(wybranaMetoda) {
+            case 1:
+                std::cout << "\n--- Uruchomiono: METODA LANCUCHOWA ---";
+                obslugujMenu<KatalogChain>();
+                break;
+            case 2:
+                std::cout << "\n--- Uruchomiono: METODA LINIOWA ---";
+                obslugujMenu<KatalogLinear>();
+                break;
+            case 3:
+                std::cout << "\n--- Uruchomiono: METODA KWADRATOWA ---";
+                obslugujMenu<KatalogQuadratic>();
+                break;
+            case 4:
+                std::cout << "\n--- Uruchomiono: PODWOJNE HASZOWANIE ---";
+                obslugujMenu<KatalogDoubleHash>();
+                break;
+            case 0:
+                std::cout << "Zamykanie programu...\n";
+                break;
+            default:
+                std::cout << "Nieprawidlowy wybor, sprobuj ponownie.\n";
+        }
+    } while (wybranaMetoda != 0);
+
+    std::cout << "\n========== KONIEC PROGRAMU ==========\n";
     return 0;
 }

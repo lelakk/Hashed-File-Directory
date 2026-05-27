@@ -129,7 +129,7 @@ void KatalogLinear::powieksz() {
             }
 
             nowaTablica[nowyIndex] = tablica[i];
-            nowaTablica[nowyIndex].usuniety = false; //resetujemy flage
+            nowaTablica[nowyIndex].usuniety = false;
         }
     }
     tablica = nowaTablica;
