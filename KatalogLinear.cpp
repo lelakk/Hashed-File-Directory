@@ -68,7 +68,6 @@ bool KatalogLinear::usun(std::string& nazwaPliku) {
             tablica[index].zajety = false;
             tablica[index].usuniety = true;
             liczbaElementow--;
-            std::cout << "Usunieto plik: " << nazwaPliku << std::endl;
             return true;
         }
         index = (index + 1) % pojemnosc;

@@ -50,8 +50,11 @@ void obslugujMenu() {
             case 3:
                 std::cout << "Podaj nazwe pliku do usuniecia: ";
                 std::cin >> nazwa;
-                katalog.usun(nazwa);
-                std::cout << "Wykonano polecenie usuniecia pliku.\n";
+                if (katalog.usun(nazwa)) {
+                    std::cout << "Usunieto plik: " << nazwa << "\n";
+                } else {
+                    std::cout << "Plik '" << nazwa << "' nie istnieje.\n";
+                }
                 break;
             case 4:
                 std::cout << "\n--- STAN KATALOGU ---\n";
@@ -105,7 +108,11 @@ int main() {
     }
 
     std::cout << "\n=== Usuwanie ===\n";
-    katalogC.usun(f2);
+    if (katalogC.usun(f2)) {
+        std::cout << "Usunieto '" << f2 << "'\n";
+    } else {
+        std::cout << "Plik '" << f2 << "' nie istnieje\n";
+    }
 
     std::cout << "\n=== Stan po usunieciu ===\n";
     katalogC.wyswietl();
@@ -147,7 +154,11 @@ int main() {
     }
 
     std::cout << "\n=== Usuwanie ===\n";
-    katalogL.usun(f2);
+    if (katalogL.usun(f2)) {
+        std::cout << "Usunieto '" << f2 << "'\n";
+    } else {
+        std::cout << "Plik '" << f2 << "' nie istnieje\n";
+    }
 
     std::cout << "\n=== Stan po usunieciu ===\n";
     katalogL.wyswietl();
@@ -189,7 +200,11 @@ int main() {
     }
 
     std::cout << "\n=== Usuwanie ===\n";
-    katalogQ.usun(f2);
+    if (katalogQ.usun(f2)) {
+        std::cout << "Usunieto '" << f2 << "'\n";
+    } else {
+        std::cout << "Plik '" << f2 << "' nie istnieje\n";
+    }
 
     std::cout << "\n=== Stan po usunieciu ===\n";
     katalogQ.wyswietl();
@@ -231,7 +246,11 @@ int main() {
     }
 
     std::cout << "\n=== Usuwanie ===\n";
-    katalogD.usun(f2);
+    if (katalogD.usun(f2)) {
+        std::cout << "Usunieto '" << f2 << "'\n";
+    } else {
+        std::cout << "Plik '" << f2 << "' nie istnieje\n";
+    }
 
     std::cout << "\n=== Stan po usunieciu ===\n";
     katalogD.wyswietl();
