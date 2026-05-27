@@ -1,6 +1,6 @@
 #ifndef HASHED_FILE_DIRECTORY_KATALOG_HPP
 #define HASHED_FILE_DIRECTORY_KATALOG_HPP
-
+// Paweł Lelakowski
 #include <vector>
 #include <string>
 

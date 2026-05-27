@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "katalog.hpp"
-
+// Paweł Lelakowski
 class KatalogDoubleHash {
     std::vector<wpisKatalogowy> tablica;
     int pojemnosc;

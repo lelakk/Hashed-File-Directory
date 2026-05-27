@@ -1,13 +1,9 @@
-//
-// Created by Jan Józwik on 12/05/2026.
-//
-
 #ifndef KATALOGPROJEKT_KATALOGCHAIN_H
 #define KATALOGPROJEKT_KATALOGCHAIN_H
 
 #include <vector>
 #include "katalog.hpp"
-
+// Paweł Lelakowski
 
 class KatalogChain {
     std::vector<std::vector<wpisKatalogowy>> tablica;

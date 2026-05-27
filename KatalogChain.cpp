@@ -1,6 +1,6 @@
 #include "KatalogChain.hpp"
 #include <iostream>
-
+// Paweł Lelakowski
 int KatalogChain::haszuj(std::string nazwaPliku) {
     int hash = 0;
     for (char c : nazwaPliku) {

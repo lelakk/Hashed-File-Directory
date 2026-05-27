@@ -1,6 +1,6 @@
 #include "KatalogDoubleHash.h"
 #include <iostream>
-
+//Paweł Lelakowski
 int KatalogDoubleHash::haszuj(std::string& nazwaPliku, int size) {
     int hash = 0;
     for (char c : nazwaPliku) {
